@@ -1,0 +1,16 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "native",
+      "name": "C:\\Users\\The_S\\Desktop\\Portafolio_Web",
+      "project": ""
+    },
+    {
+      "type": "managed",
+      "name": "C:\\Users\\The_S\\Desktop\\Portafolio_Web(1)",
+      "project": ""
+    }
+  ]
+}

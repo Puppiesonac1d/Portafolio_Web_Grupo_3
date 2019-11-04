@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "tarea-Portafolio_Web",
+      "appliesTo": "/",
+      "type": "launch"
+    },
+    {
+      "taskName": "tarea-Portafolio_Web",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}

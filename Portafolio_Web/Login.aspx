@@ -20,39 +20,49 @@
 
     <!--Custom styles-->
     <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <style>
+        .inner-div {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            top: 30%;
+            left: 25%;
+            right: 30%;
+            bottom: 30%;
+        }
+    </style>
 </head>
 <body>
-    <div id="ParentDiv" class="container-fluid" style="text-align: center; border: 3px black; background-color: #222222; height: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;">
-        
-        <div class="container" style="position: center; top: 0; bottom: 0; left: 0; right: 0; margin: auto;">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Ingresar al sistema</h3>
-                </div>
-                <div class="card-body">
-                    <form id="form1" runat="server">
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <input id="correo" type="text" class="form-control" placeholder="Correo" runat="server">
+
+    <div style="width: 100%; height: 100%;">
+        <div class="inner-div">
+            <div class="card-header" style="text-align: center; vertical-align: middle;">
+                <h3>Ingresar al sistema</h3>
+            </div>
+            <div class="card-body">
+                <form id="form1" runat="server">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input id="contrasena" type="password" class="form-control" placeholder="Contraseña" runat="server">
+                        <input id="correo" type="text" class="form-control" placeholder="Correo" runat="server">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <div class="form-group">
-                            <asp:Button ID="Button1" runat="server" Text="Iniciar Sesión" OnClick="Button1_Click" />
-                            <br />
-                            <asp:Label ID="lblError" runat="server" Text="Usuario o contraseña incorrectos, intente nuevamente"></asp:Label>
-                        </div>
-                    </form>
-                </div>
+                        <input id="contrasena" type="password" class="form-control" placeholder="Contraseña" runat="server">
+                    </div>
+                    <div class="form-group">
+                        <asp:Button ID="Button1" runat="server" Text="Iniciar Sesión" OnClick="Button1_Click" />
+                        <br />
+                        <asp:Label ID="lblError" runat="server" Text="Usuario o contraseña incorrectos, intente nuevamente"></asp:Label>
+                    </div>
+                </form>
             </div>
         </div>
-        <br />
     </div>
+
 </body>
 </html>

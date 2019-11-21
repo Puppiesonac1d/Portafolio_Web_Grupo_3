@@ -21,6 +21,7 @@ namespace Portafolio
         {
             if (!Page.IsPostBack)
             {
+               
                 panelCRUDtarea.Visible = true;
 
                 Array enumList1 = Enum.GetValues(typeof(tiposTarea));

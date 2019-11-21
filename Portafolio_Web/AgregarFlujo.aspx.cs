@@ -16,33 +16,41 @@ namespace Portafolio
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            try
+            if (!Page.IsPostBack)
             {
-                ora2.Open();
-                System.Data.OracleClient.OracleCommand comando = new System.Data.OracleClient.OracleCommand("listar_flujo");
-                comando.Connection = ora2;
-                comando.Connection = ora2;
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("p_recordset", OracleType.Cursor).Direction = ParameterDirection.Output;
-                System.Data.OracleClient.OracleDataAdapter adaptador = new System.Data.OracleClient.OracleDataAdapter();
+                div_crear.Visible = false;
+                inner_div_tabla.Visible = false;
+                try
+                {
+                    ora2.Open();
+                    System.Data.OracleClient.OracleCommand comando = new System.Data.OracleClient.OracleCommand("listar_flujo");
+                    comando.Connection = ora2;
+                    comando.Connection = ora2;
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("p_recordset", OracleType.Cursor).Direction = ParameterDirection.Output;
+                    System.Data.OracleClient.OracleDataAdapter adaptador = new System.Data.OracleClient.OracleDataAdapter();
 
-                adaptador.SelectCommand = comando;
-                DataTable dt = new DataTable();
-                adaptador.Fill(dt);
-                tblFlujo.DataSource = dt;
-                tblFlujo.DataBind();
-                ora2.Close();
+                    adaptador.SelectCommand = comando;
+                    DataTable dt = new DataTable();
+                    adaptador.Fill(dt);
+                    tblFlujo.DataSource = dt;
+                    tblFlujo.DataBind();
+                    ora2.Close();
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.ToString();
+                }
             }
-            catch (Exception ex)
-            {
-                lblError.Text = ex.ToString();
-            }
+
+
         }
 
         protected void btnGuardarFlujo_Click(object sender, EventArgs e)
         {
             try
             {
+
                 ora2.Open();
                 System.Data.OracleClient.OracleCommand comando2 = new System.Data.OracleClient.OracleCommand("INSERT_flujo", ora2);
                 comando2.CommandType = System.Data.CommandType.StoredProcedure;
@@ -77,6 +85,26 @@ namespace Portafolio
             {
                 lblError.Text = ex.ToString();
             }
+        }
+
+        protected void cambiar_seleccion(object sender, EventArgs e)
+        {
+            if (cambiar_opcion.SelectedIndex.Equals(1))
+            {
+                div_crear.Visible = true;
+                inner_div_tabla.Visible = false;
+            }
+            else if (cambiar_opcion.SelectedIndex.Equals(2))
+            {
+                div_crear.Visible = false;
+                inner_div_tabla.Visible = true;
+            }
+            else
+            {
+                div_crear.Visible = false;
+                inner_div_tabla.Visible = false;
+            }
+
         }
     }
 }

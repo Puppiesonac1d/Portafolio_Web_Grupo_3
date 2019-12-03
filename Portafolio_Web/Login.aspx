@@ -20,7 +20,6 @@
 
     <!--Custom styles-->
     <link rel="stylesheet" type="text/css" href="styles.css">
-
     <style>
         .inner-div {
             position: absolute;
@@ -33,12 +32,12 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: #1E1E1E">
 
     <div style="width: 100%; height: 100%;">
         <div class="inner-div">
             <div class="card-header" style="text-align: center; vertical-align: middle;">
-                <h3>Ingresar al sistema</h3>
+                <h3 style="color: #C8C8C8">Ingresar al sistema</h3>
             </div>
             <div class="card-body">
                 <form id="form1" runat="server">
@@ -57,7 +56,9 @@
                     <div class="form-group">
                         <asp:Button ID="Button1" runat="server" Text="Iniciar Sesión" OnClick="Button1_Click" />
                         <br />
-                        <asp:Label ID="lblError" runat="server" Text="Usuario o contraseña incorrectos, intente nuevamente"></asp:Label>
+                        <div class="card-header" style="text-align: center; vertical-align: middle;">
+                            <asp:Label ID="lblError" runat="server" Text="Usuario o contraseña incorrectos, intente nuevamente" Style="color: #C8C8C8"></asp:Label>
+                        </div>
                     </div>
                 </form>
             </div>

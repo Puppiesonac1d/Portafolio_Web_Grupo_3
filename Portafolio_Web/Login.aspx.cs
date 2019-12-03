@@ -40,11 +40,11 @@ namespace Portafolio
                     comando.ExecuteNonQuery();
 
                     OracleDataReader dr = comando.ExecuteReader();
-                    string correoTMP = comando.Parameters["o_correo"].Value.ToString();
+                    string correoTMP = comando.Parameters["o_correo"].Value.ToString().ToUpper();
                     string contrasenaTMP = comando.Parameters["o_contrasena"].Value.ToString();
                     string credencialStr = comando.Parameters["o_credencial"].Value.ToString();
 
-                    if (correoTMP == correo.Value.ToString() && contrasenaTMP == contrasena.Value.ToString() && credencialStr != "1")
+                    if (correoTMP == correo.Value.ToString().ToUpper() && contrasenaTMP == contrasena.Value.ToString() && credencialStr != "1")
                     {
                         Session["Value"] = correoTMP.ToString();
                         if (Session["Value"] != null)

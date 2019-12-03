@@ -34,18 +34,18 @@
             bottom: 30%;
         }
 
-        .auto-style4 {
-            height: 131px;
-        }
-
-        .auto-style5 {
-            color: #9D9D9D;
+        .auto-style6 {
+            position: absolute;
+            width: 80%;
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            bottom: 50%;
         }
     </style>
-
 </head>
-<body>
-    <form runat="server" style="width: 100%; height: 100%;">
+<body style="background-color: #1D1D1D">
+    <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -65,7 +65,6 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -80,6 +79,7 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/Calcular_Carga">Inicio</a></li>
                         <li><a runat="server" href="~/Mantenedor_Tareas">Agregar Tarea</a></li>
+                        <li><a runat="server" href="Mantenedor_Tareas_Subordinada.aspx">Agregar Tarea Subordinada</a></li>
                         <li><a runat="server" href="~/AgregarFlujo">Flujos de Tarea</a></li>
                         <li><a runat="server" href="~/Login">Cerrar Sesión</a></li>
                     </ul>
@@ -94,17 +94,13 @@
                 </div>
             </div>
         </div>
-        <div class="auto-style3" style="background-image: url('/Imagenes/mountains.png'); height: 1080px; width: 1920px; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;">
-            <div class="container body-content">
-                <div class="inner-div">
-                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                    </asp:ContentPlaceHolder>
-                </div>
+
+        <div class="container body-content">
+            <div class="auto-style6">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
             </div>
         </div>
-        <footer class="auto-style4" style="text-align: center; background-color: #222222; width: 100%;">
-            <p style="color: #9D9D9D; position: center;">&copy; <%: DateTime.Now.Year %> - Proyecto Portafolio</p>
-        </footer>
     </form>
 </body>
 </html>

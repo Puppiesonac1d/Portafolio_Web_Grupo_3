@@ -1,14 +1,12 @@
-﻿
-using Oracle.DataAccess.Client;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System;
+using Oracle.DataAccess.Client;
 
 namespace Portafolio
 {
@@ -16,12 +14,15 @@ namespace Portafolio
     {
         //String de conexión
         public Oracle.DataAccess.Client.OracleConnection ora = new Oracle.DataAccess.Client.OracleConnection("Data Source=localhost;Password=HR;USER ID=HR;");
+
         public System.Data.OracleClient.OracleConnection ora2 = new System.Data.OracleClient.OracleConnection("Data Source=localhost;Password=HR;USER ID=HR;");
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-               
+
+                txtCorreo.Text = Session["Value"].ToString();
                 panelCRUDtarea.Visible = true;
 
                 Array enumList1 = Enum.GetValues(typeof(tiposTarea));
@@ -51,8 +52,10 @@ namespace Portafolio
                 }
                 catch (Exception ex)
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error' " + ex.ToString() +"');</script>");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error' " + ex.ToString() + "');</script>");
                 }
+
+
             }
         }
 
@@ -104,8 +107,9 @@ namespace Portafolio
                 int flujo = ddlFlujo.SelectedIndex + 1;
 
                 ora2.Open();
-                System.Data.OracleClient.OracleCommand comando2 = new System.Data.OracleClient.OracleCommand("INSERT_TAREA", ora2);
+                System.Data.OracleClient.OracleCommand comando2 = new System.Data.OracleClient.OracleCommand("INSERT_TAREA_SUB", ora2);
                 comando2.CommandType = System.Data.CommandType.StoredProcedure;
+                comando2.Parameters.Add("P_DESCRIPCION", OracleType.VarChar).Value = txtDescripcion.Text;
                 comando2.Parameters.Add("P_DESCRIPCION", OracleType.VarChar).Value = txtDescripcion.Text;
                 comando2.Parameters.Add("P_IDUSUARIO", OracleType.Int32).Value = id;
                 comando2.Parameters.Add("P_ESTADO", OracleType.Int32).Value = 4;
@@ -117,7 +121,7 @@ namespace Portafolio
 
                 txtDescripcion.Text = "";
                 txtCorreo.Text = "";
-                
+
             }
             catch (Exception ex)
             {
@@ -125,10 +129,5 @@ namespace Portafolio
             }
 
         }
-
-
-
-
-
     }
 }

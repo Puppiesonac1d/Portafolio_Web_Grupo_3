@@ -6,7 +6,9 @@
         <br>
         <br>
         <div id="inner_div_crud_tarea_elementos" class="container-fluid" style="text-align: center; border: 3px black; background-color: #222222;">
-            <asp:Panel ID="panelCRUDtarea" runat="server" Height="200px">
+
+            <h3 style="color: #9D9D9D">Ingresar Tarea</h3>
+            <asp:Panel ID="panelCRUDtarea" runat="server">
 
                 <table style="width: 100%">
                     <tr>
@@ -70,7 +72,5 @@
             <br />
         </div>
     </div>
-    <br />
-    <br />
     <asp:Label ID="lblidddl" runat="server" Text=""></asp:Label>
 </asp:Content>

@@ -24,6 +24,11 @@ CREATE SEQUENCE incremento_id_tarea
 INCREMENT BY 1
 START WITH 1;
 
+drop sequence incremento_id_tarea_SUB;
+CREATE SEQUENCE incremento_id_tarea_SUB
+INCREMENT BY 1
+START WITH 1;
+
 drop sequence incremento_id_historial;
 CREATE SEQUENCE incremento_id_historial
 INCREMENT BY 1
@@ -88,6 +93,23 @@ FOREIGN KEY (IDESTADO) REFERENCES ESTADO(IDESTADO),
 FOREIGN KEY (IDFLUJO) REFERENCES FLUJO(IDFLUJO),
 CONSTRAINT fk_tarea FOREIGN KEY(IDTAREA) REFERENCES TAREA(IDTAREA)
 );
+
+CREATE TABLE TAREA_SUBORDINADA(
+IDTAREA_SUB INT NOT NULL,
+IDTAREA INT NOT NULL,
+DESCRIPCION_TAREA VARCHAR2(100) NOT NULL,
+IDUSUARIO INT NOT NULL,
+IDESTADO INT NOT NULL,
+Tipo_Tarea varchar2(10) not null,
+CONSTRAINT IDTAREA_sub_pk PRIMARY KEY (IDTAREA_SUB),
+FOREIGN KEY (IDUSUARIO) REFERENCES USUARIOS(IDUSUARIO),
+FOREIGN KEY (IDESTADO) REFERENCES ESTADO(IDESTADO),
+FOREIGN KEY (IDTAREA) REFERENCES TAREA(IDTAREA),
+CONSTRAINT fk_tarea_SUB FOREIGN KEY(IDTAREA_SUB) REFERENCES TAREA_SUBORDINADA(IDTAREA_SUB)
+);
+
+
+
 
 CREATE TABLE Historial_tareas(
 IDHISTORIAL_tarea INT NOT NULL,
@@ -235,18 +257,43 @@ BEGIN
     where u.correo=p_correo and t.idestado=4;
 END;
 /
-
+create or replace PROCEDURE listar_tareas_sub_asignandose (p_correo in usuarios.correo%type,p_recordset OUT SYS_REFCURSOR)
+AS 
+BEGIN 
+  OPEN p_recordset FOR
+    SELECT t.idtarea_sub "N° de Tarea Subordinada",ta.descripcion_tarea as "Tarea Padre",t.descripcion_tarea as "Descripción",
+    e.descripcion_estado as "Estado"FROM tarea_subordinada t join estado e on t.idestado = e.idestado
+    join usuarios u on u.idusuario=t.idusuario
+    JOIN tarea ta on ta.idTarea = t.idTarea
+    where u.correo=p_correo and t.idestado = 4
+    ORDER BY t.IDTAREA ASC;
+END;
+/
 
 CREATE OR REPLACE PROCEDURE listar_tareas_y_flujo (p_correo in usuarios.correo%type,p_recordset OUT SYS_REFCURSOR)
 AS 
 BEGIN 
   OPEN p_recordset FOR
-    SELECT t.idtarea,t.descripcion_tarea,t.idusuario,e.descripcion_estado,f.descripcion_flujo FROM tarea t join estado e on t.idestado = e.idestado
+    SELECT t.idtarea as "N° de Tarea",t.descripcion_tarea as "Descripción",e.descripcion_estado as "Estado",f.descripcion_flujo as "Flujo" FROM tarea t join estado e on t.idestado = e.idestado
     join flujo f on t.idflujo = f.idflujo
     join usuarios u on u.idusuario=t.idusuario
     where u.correo=p_correo
     ORDER BY t.IDTAREA ASC;
 END;
+/
+
+create or replace PROCEDURE listar_tareas_sub_y_flujo (p_correo in usuarios.correo%type,p_recordset OUT SYS_REFCURSOR)
+AS 
+BEGIN 
+  OPEN p_recordset FOR
+    SELECT t.idtarea_sub "N° de Tarea Subordinada",ta.descripcion_tarea as "Tarea Padre",t.descripcion_tarea as "Descripción",
+    e.descripcion_estado as "Estado"FROM tarea_subordinada t join estado e on t.idestado = e.idestado
+    join usuarios u on u.idusuario=t.idusuario
+    JOIN tarea ta on ta.idTarea = t.idTarea
+    where u.correo=p_correo
+    ORDER BY t.IDTAREA ASC;
+END;
+
 /
 
 
@@ -264,6 +311,17 @@ IS
 BEGIN
   UPDATE TAREA SET IDESTADO = P_ESTADO
   WHERE IDTAREA = P_IDTAREA;
+  COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE INSERT_TAREA_SUB
+(p_descripcion in tarea_subordinada.descripcion_tarea%type,p_idusuario in tarea_subordinada.idusuario%type 
+,P_ESTADO IN INT,p_tipotarea in tarea_subordinada.tipo_tarea%type,p_idtarea tarea.idtarea%type)
+IS
+BEGIN  
+  INSERT INTO TAREA_SUBORDINADA (IDTAREA_SUB,IDTAREA,DESCRIPCION_TAREA,IDUSUARIO,IDESTADO,TIPO_TAREA) 
+  VALUES (incremento_id_tarea_SUB.nextval,P_IDTAREA,P_DESCRIPCION,P_IDUSUARIO,P_ESTADO,P_TIPOTAREA); 
   COMMIT;
 END;
 /

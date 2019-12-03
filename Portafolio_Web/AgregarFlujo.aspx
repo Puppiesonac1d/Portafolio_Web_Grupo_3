@@ -28,9 +28,13 @@
             <br />
             <div id="inner_div_tabla_contenido" class="container-fluid" style="text-align: center; border: 3px black; background-color: #222222;">
                 <br />
-                <asp:GridView ID="tblFlujo" runat="server" AutoPostBack="true" CssClass="table table-hover " GridLines="Both" Height="100px" Width="1429px" HorizontalAlign="Center" ForeColor="#9D9D9D" AllowPaging="True" AllowSorting="True" BackColor="White" CellPadding="10" Font-Bold="True" PageSize="6">
+                <asp:GridView ID="tblFlujo" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="1429px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="White" CellPadding="10" Font-Bold="True" PageSize="6">
                     <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
                     <PagerSettings PageButtonCount="4" />
+                    <Columns>
+                        <asp:CommandField ShowSelectButton="True" />
+                    </Columns>
+                    <SelectedRowStyle BackColor="#3399FF" />
                 </asp:GridView>
                 <br />
             </div>

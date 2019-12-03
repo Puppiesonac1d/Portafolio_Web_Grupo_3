@@ -10,123 +10,87 @@
 namespace Portafolio {
     
     
-    public partial class Calcular_Carga {
+    public partial class Mantenedor_Tareas_Subordinada {
         
         /// <summary>
-        /// Control div_calcular_carga_correo.
+        /// Control panel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_calcular_carga_correo;
+        protected global::System.Web.UI.WebControls.Panel panel1;
         
         /// <summary>
-        /// Control txtCorreo.
+        /// Control tablaTareas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCorreo;
+        protected global::System.Web.UI.WebControls.GridView tablaTareas;
         
         /// <summary>
-        /// Control txtError_asignacion.
+        /// Control Label5.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtError_asignacion;
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// Control tablaPendientes.
+        /// Control txtDescripcionTarea_2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView tablaPendientes;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionTarea_2;
         
         /// <summary>
-        /// Control btnAsignar.
+        /// Control Label6.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAsignar;
+        protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
-        /// Control tablaPendientes2.
+        /// Control txtCorreoEncargado_2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView tablaPendientes2;
+        protected global::System.Web.UI.WebControls.TextBox txtCorreoEncargado_2;
         
         /// <summary>
-        /// Control btnAsignar_2.
+        /// Control Label7.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAsignar_2;
+        protected global::System.Web.UI.WebControls.Label Label7;
         
         /// <summary>
-        /// Control tablaCarga.
+        /// Control ddlTipoTarea_2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView tablaCarga;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoTarea_2;
         
         /// <summary>
-        /// Control ddlCambiarEstado.
+        /// Control btnGuardar_Tarea_2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCambiarEstado;
-        
-        /// <summary>
-        /// Control btnCargarTareas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCargarTareas;
-        
-        /// <summary>
-        /// Control tablaCarga2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView tablaCarga2;
-        
-        /// <summary>
-        /// Control ddlCambiarEstado2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCambiarEstado2;
-        
-        /// <summary>
-        /// Control btnCargarTareas2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCargarTareas2;
+        protected global::System.Web.UI.WebControls.Button btnGuardar_Tarea_2;
     }
 }

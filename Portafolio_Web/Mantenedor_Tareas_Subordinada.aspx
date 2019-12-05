@@ -18,6 +18,18 @@
                 <tr>
                     <td>
                         <br>
+                        <asp:Label ID="Label1" runat="server" Text="Nombre de Tarea:" Style="color: #9D9D9D;"></asp:Label>
+                        <br>
+                    </td>
+                    <td>
+                        <br>
+                        <asp:TextBox ID="txtNombre" runat="server" Width="300px"></asp:TextBox>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
                         <asp:Label ID="Label5" runat="server" Text="Descripción de Tarea:" Style="color: #9D9D9D;"></asp:Label>
                         <br>
                     </td>

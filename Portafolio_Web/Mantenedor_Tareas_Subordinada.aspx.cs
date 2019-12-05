@@ -89,6 +89,7 @@ namespace Portafolio
                 System.Data.OracleClient.OracleCommand comando2 = new System.Data.OracleClient.OracleCommand("INSERT_TAREA_SUB", ora2);
                 comando2.CommandType = System.Data.CommandType.StoredProcedure;
                 comando2.Parameters.Add("P_IDTAREA", OracleType.Int32).Value = Int32.Parse(textTarea);
+                comando2.Parameters.Add("P_NOMBRE", OracleType.VarChar).Value = txtNombre.Text;
                 comando2.Parameters.Add("P_DESCRIPCION", OracleType.VarChar).Value = txtDescripcionTarea_2.Text;
                 comando2.Parameters.Add("P_IDUSUARIO", OracleType.Int32).Value = id;
                 comando2.Parameters.Add("P_ESTADO", OracleType.Int32).Value = 4;

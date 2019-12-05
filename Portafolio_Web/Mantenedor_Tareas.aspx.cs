@@ -107,9 +107,9 @@ namespace Portafolio
                 int flujo = ddlFlujo.SelectedIndex + 1;
 
                 ora2.Open();
-                System.Data.OracleClient.OracleCommand comando2 = new System.Data.OracleClient.OracleCommand("INSERT_TAREA_SUB", ora2);
+                System.Data.OracleClient.OracleCommand comando2 = new System.Data.OracleClient.OracleCommand("INSERT_TAREA", ora2);
                 comando2.CommandType = System.Data.CommandType.StoredProcedure;
-                comando2.Parameters.Add("P_DESCRIPCION", OracleType.VarChar).Value = txtDescripcion.Text;
+                comando2.Parameters.Add("P_NOMBRE", OracleType.VarChar).Value = txtNombre.Text;
                 comando2.Parameters.Add("P_DESCRIPCION", OracleType.VarChar).Value = txtDescripcion.Text;
                 comando2.Parameters.Add("P_IDUSUARIO", OracleType.Int32).Value = id;
                 comando2.Parameters.Add("P_ESTADO", OracleType.Int32).Value = 4;
@@ -118,9 +118,9 @@ namespace Portafolio
                 comando2.ExecuteNonQuery();
                 // ora2.Close();
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Tarea Insertada');</script>");
-
+                txtNombre.Text = "";
                 txtDescripcion.Text = "";
-                txtCorreo.Text = "";
+                // txtCorreo.Text = "";
 
             }
             catch (Exception ex)

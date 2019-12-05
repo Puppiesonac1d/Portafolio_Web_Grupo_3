@@ -49,6 +49,7 @@ namespace Portafolio
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error actualizando');</script>");
                 }
+
                 try
                 {
                     ora2.Open();
@@ -249,7 +250,7 @@ namespace Portafolio
             try
             {
                 ora2.Open();
-                System.Data.OracleClient.OracleCommand comando3 = new System.Data.OracleClient.OracleCommand("listar_tareas_sub_y_flujo");
+                System.Data.OracleClient.OracleCommand comando3 = new System.Data.OracleClient.OracleCommand("listar_tareas_sub_asignandose");
                 comando3.Connection = ora2;
                 comando3.CommandType = System.Data.CommandType.StoredProcedure;
                 comando3.Parameters.Add("p_correo", OracleType.VarChar).Value = txtCorreo.Text;

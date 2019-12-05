@@ -23,7 +23,7 @@ namespace Portafolio
                 try
                 {
                     ora2.Open();
-                    System.Data.OracleClient.OracleCommand comando = new System.Data.OracleClient.OracleCommand("listar_flujo");
+                    System.Data.OracleClient.OracleCommand comando = new System.Data.OracleClient.OracleCommand("listar_flujo_aprobado");
                     comando.Connection = ora2;
                     comando.Connection = ora2;
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
@@ -68,7 +68,7 @@ namespace Portafolio
             try
             {
                 ora2.Open();
-                System.Data.OracleClient.OracleCommand comando = new System.Data.OracleClient.OracleCommand("listar_flujo");
+                System.Data.OracleClient.OracleCommand comando = new System.Data.OracleClient.OracleCommand("listar_flujo_aprobado");
                 comando.Connection = ora2;
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("p_recordset", OracleType.Cursor).Direction = ParameterDirection.Output;

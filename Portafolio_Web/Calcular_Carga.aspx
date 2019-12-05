@@ -17,12 +17,14 @@
         <asp:Label ID="txtError_asignacion" runat="server" ForeColor="#9D9D9D"></asp:Label>
         <br />
         <br />
-        <asp:GridView ID="tablaPendientes" AutoPostBack="true" runat="server" Width="100%" CssClass="table table-hover" GridLines="Both" ForeColor="#9D9D9D">
-            <Columns>
-                <asp:CommandField ShowSelectButton="True" />
-            </Columns>
-            <SelectedRowStyle BackColor="#3399FF" />
-        </asp:GridView>
+        <asp:GridView ID="tablaPendientes" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="1429px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="White" CellPadding="10" Font-Bold="True" PageSize="6">
+                <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
+                <PagerSettings PageButtonCount="4" />
+                <Columns>
+                    <asp:CommandField ShowSelectButton="True" />
+                </Columns>
+                <SelectedRowStyle BackColor="#3399FF" />
+            </asp:GridView>
         <asp:Button ID="btnAsignar" runat="server" Text="Asignar a usuario" OnClick="btnAsignar_Click" />
         <br />
         <br />

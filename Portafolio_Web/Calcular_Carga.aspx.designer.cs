@@ -49,6 +49,15 @@ namespace Portafolio {
         protected global::System.Web.UI.WebControls.GridView tablaPendientes;
         
         /// <summary>
+        /// Control lblMensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
+        
+        /// <summary>
         /// Control btnAsignar.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace Portafolio {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView tablaPendientes2;
+        
+        /// <summary>
+        /// Control lblMensaje_2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensaje_2;
         
         /// <summary>
         /// Control btnAsignar_2.

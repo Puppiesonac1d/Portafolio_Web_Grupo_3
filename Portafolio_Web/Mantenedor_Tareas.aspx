@@ -2,11 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div id="inner_div_crud_tarea" class="container-fluid" style="text-align: center; border: 3px black; background-color: #222222;">
+    <div id="div_crud_tareas" class="container-fluid" style="border-style: none; text-align: center; background-color: #2B7A78; height: auto;">
         <br>
         <br>
-        <div id="inner_div_crud_tarea_elementos" class="container-fluid" style="text-align: center; border: 3px black; background-color: #222222;">
-
+        <div id="inner_div_crud_tarea_elementos" class="container-fluid" style="text-align: center; background-color: #17252A; width: 900px; margin-top: 50px; margin-bottom: 50px; height: auto;">
             <h3 style="color: #9D9D9D">Ingresar Tarea</h3>
             <asp:Panel ID="panelCRUDtarea" runat="server">
 

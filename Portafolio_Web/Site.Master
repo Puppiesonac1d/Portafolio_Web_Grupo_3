@@ -36,15 +36,18 @@
 
         .auto-style6 {
             position: absolute;
-            width: 80%;
+            width: 100%;
             top: 10%;
-            left: 10%;
-            right: 10%;
             bottom: 50%;
+        }
+
+        .inactiveLink {
+            pointer-events: none;
+            cursor: default;
         }
     </style>
 </head>
-<body style="background-color: #1D1D1D">
+<body style="background-color: #3AAFA9">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -65,7 +68,7 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #17252A">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -77,25 +80,20 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
+                        <li style="overflow: auto; list-style: none;">
+                            <asp:HyperLink ID="lblUsuario" runat="server">HyperLink</asp:HyperLink>
+                        </li>
                         <li><a runat="server" href="~/Calcular_Carga">Inicio</a></li>
                         <li><a runat="server" href="~/Mantenedor_Tareas">Agregar Tarea</a></li>
                         <li><a runat="server" href="Mantenedor_Tareas_Subordinada.aspx">Agregar Tarea Subordinada</a></li>
                         <li><a runat="server" href="~/AgregarFlujo">Flujos de Tarea</a></li>
                         <li><a runat="server" href="~/Login">Cerrar Sesión</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right align-items-end nav justify-content-end">
-                        <li>
-                            <asp:Label ID="Label1" runat="server" Text="Bienvenido: " ForeColor="White" Font-Size="10"></asp:Label>
-                        </li>
-                        <li>
-                            <asp:Label ID="lblUsuario" runat="server" Text="" ForeColor="White" Font-Size="10"></asp:Label>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
 
-        <div class="container body-content">
+        <div class="container body-content" style="width: 100%;">
             <div class="auto-style6">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>

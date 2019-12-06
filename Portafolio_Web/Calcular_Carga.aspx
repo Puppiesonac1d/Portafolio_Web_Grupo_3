@@ -2,82 +2,95 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div id="div_calcular_carga_correo" class="container-fluid" style="text-align: center; border: 3px black; background-color: #222222;" runat="server">
+    <div id="div_calcular_carga_correo" class="container-fluid" style="text-align: center; border: 3px black; background-color: #7F8C8C;" runat="server">
         <div id="inner_div_correo" class="container-fluid" style="text-align: center; border: 3px black">
             <h3 style="color: #9D9D9D">Usuario</h3>
             <asp:TextBox ID="txtCorreo" runat="server" Width="300px"></asp:TextBox>
         </div>
-        <br />
-        <br />
+    </div>
+
+    <div id="div_tareas_pendientes" class="container-fluid" style="border-style: none; text-align: center; background-color: #2B7A78; height: auto;">
+        <div style="float: left; background-color: #17252A; width: 900px; margin-top: 50px; margin-bottom: 50px; height: auto;">
+            <h3 style="color: #9D9D9D">Tareas pendientes de asignación</h3>
+            <asp:Label ID="txtError_asignacion" runat="server" ForeColor="#9D9D9D"></asp:Label>
+            <asp:GridView ID="tablaPendientes" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="700px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="#E5E5E5" CellPadding="10" Font-Bold="True" PageSize="6">
+                <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
+                <PagerSettings PageButtonCount="4" />
+                <Columns>
+                    <asp:CommandField ShowSelectButton="True" />
+                </Columns>
+                <RowStyle BackColor="Orange" />
+                <SelectedRowStyle BackColor="#99CCFF" />
+            </asp:GridView>
+            <asp:Label ID="lblMensaje" runat="server" Text="Felicidades, estás al día." ForeColor="#9D9D9D"></asp:Label>
+            <asp:Button ID="btnAsignar" runat="server" Text="Asignar a usuario" OnClick="btnAsignar_Click" BackColor="#17252A" ForeColor="#E9E9E9" />
+            <br />
+            <br />
+        </div>
+
+        <div style="float: right; background-color: #17252A; width: 900px; margin-top: 50px; margin-bottom: 50px; height: auto;">
+            <h3 style="color: #9D9D9D">Tareas subordinadas pendientes de asignación</h3>
+            <asp:GridView ID="tablaPendientes2" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="700px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="#E5E5E5" CellPadding="10" Font-Bold="True" PageSize="6">
+                <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
+                <PagerSettings PageButtonCount="4" />
+                <Columns>
+                    <asp:CommandField ShowSelectButton="True" />
+                </Columns>
+                <RowStyle BackColor="#FF8040" />
+                <SelectedRowStyle BackColor="#99CCFF" />
+            </asp:GridView>
+            <asp:Label ID="lblMensaje_2" runat="server" Text="Felicidades, estás al día." ForeColor="#9D9D9D"></asp:Label>
+            <asp:Button ID="btnAsignar_2" runat="server" Text="Asignar tarea subordinada a usuario" OnClick="btnAsignar_2_Click" BackColor="#17252A" ForeColor="#E9E9E9" />
+            <br />
+            <br />
+        </div>
+
     </div>
     <br />
     <br />
-    <div id="inner_div_crud_tarea_pendiente" class="container-fluid" style="text-align: center; border: 3px black; background-color: #222222;">
-        <h3 style="color: #9D9D9D">Tareas pendientes de asignación</h3>
-        <asp:Label ID="txtError_asignacion" runat="server" ForeColor="#9D9D9D"></asp:Label>
-        <br />
-        <br />
-        <asp:GridView ID="tablaPendientes" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="1429px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="White" CellPadding="10" Font-Bold="True" PageSize="6">
-                <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
-                <PagerSettings PageButtonCount="4" />
-                <Columns>
-                    <asp:CommandField ShowSelectButton="True" />
-                </Columns>
-                <SelectedRowStyle BackColor="#3399FF" />
-            </asp:GridView>
-        <asp:Button ID="btnAsignar" runat="server" Text="Asignar a usuario" OnClick="btnAsignar_Click" />
-        <br />
-        <br />
-        <div id="inner_div_pendiente_usuario_tabla_2" class="container-fluid" style="text-align: center; vertical-align: top; left: auto; height: 100%; overflow: auto; width: auto;">
-            <asp:GridView ID="tablaPendientes2" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="1429px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="White" CellPadding="10" Font-Bold="True" PageSize="6">
-                <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
-                <PagerSettings PageButtonCount="4" />
-                <Columns>
-                    <asp:CommandField ShowSelectButton="True" />
-                </Columns>
-                <SelectedRowStyle BackColor="#3399FF" />
-            </asp:GridView>
+    <div id="inner_div_crud_tarea_carga" class="container-fluid" style="border-style: none; text-align: center; background-color: #2B7A78; height: auto;">
+
+        <div style="float: left; background-color: #17252A; width: 900px; margin-top: 50px; margin-bottom: 50px; height: auto;">
+            <h3 style="color: #9D9D9D">Tareas asignadas al usuario</h3>
+            <div id="inner_div_carga_usuario_tabla" class="container-fluid" style="text-align: center; vertical-align: top; left: auto; height: 100%; overflow: auto; width: auto;">
+                <asp:GridView ID="tablaCarga" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="700px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="#E5E5E5" CellPadding="10" Font-Bold="True" PageSize="6" OnRowDataBound="GridView1_RowDataBound">
+                    <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
+                    <PagerSettings PageButtonCount="4" />
+                    <Columns>
+                        <asp:CommandField ShowSelectButton="True" />
+                    </Columns>
+                    <SelectedRowStyle BackColor="#99CCFF" />
+                </asp:GridView>
+            </div>
+            <asp:DropDownList ID="ddlCambiarEstado" runat="server" Height="30px" Width="175px">
+            </asp:DropDownList>
+            &nbsp;
+            <asp:Button ID="btnCargarTareas" runat="server" Text="Cambiar estado de tarea" OnClick="btnCargarTareas_Click" BackColor="#17252A" ForeColor="#E9E9E9" />
+            <br />
+            <br />
         </div>
-        <asp:Button ID="btnAsignar_2" runat="server" Text="Asignar a usuario" OnClick="btnAsignar_2_Click" />
-        <br />
-        <br />
+
+        <div style="float: right; background-color: #17252A; width: 900px; margin-top: 50px; margin-bottom: 50px; height: auto;">
+            <h3 style="color: #9D9D9D">Tareas subordinadas</h3>
+            <div id="inner_div_carga_usuario_tabla_2" class="container-fluid" style="text-align: center; vertical-align: top; left: auto; height: 100%; overflow: auto; width: auto;">
+                <asp:GridView ID="tablaCarga2" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="700px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="#E5E5E5" CellPadding="10" Font-Bold="True" PageSize="6" OnRowDataBound="GridView1_RowDataBound_2">
+                    <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
+                    <PagerSettings PageButtonCount="4" />
+                    <Columns>
+                        <asp:CommandField ShowSelectButton="True" />
+                    </Columns>
+                    <SelectedRowStyle BackColor="#99CCFF" />
+                </asp:GridView>
+            </div>
+            <asp:DropDownList ID="ddlCambiarEstado2" runat="server" Height="30px" Width="175px">
+            </asp:DropDownList>
+            &nbsp;
+            <asp:Button ID="btnCargarTareas2" runat="server" Text="Cambiar estado de tarea subordinada" OnClick="btnCargarTareas_2_Click" BackColor="#17252A" ForeColor="#E9E9E9" />
+            <br />
+            <br />
+        </div>
     </div>
     <br />
     <br />
-    <div id="inner_div_crud_tarea_carga" class="container-fluid" style="text-align: center; border: 3px black; background-color: #222222;">
-        <h3 style="color: #9D9D9D">Tareas asignadas al usuario</h3>
-        <div id="inner_div_carga_usuario_tabla" class="container-fluid" style="text-align: center; vertical-align: top; left: auto; height: 100%; overflow: auto; width: auto;">
-            <asp:GridView ID="tablaCarga" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="1429px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="White" CellPadding="10" Font-Bold="True" PageSize="6">
-                <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
-                <PagerSettings PageButtonCount="4" />
-                <Columns>
-                    <asp:CommandField ShowSelectButton="True" />
-                </Columns>
-                <SelectedRowStyle BackColor="#3399FF" />
-            </asp:GridView>
-        </div>
-        <asp:DropDownList ID="ddlCambiarEstado" runat="server" Height="30px" Width="175px">
-        </asp:DropDownList>
-        &nbsp;
-            <asp:Button ID="btnCargarTareas" runat="server" Text="Cambiar estado de tarea" OnClick="btnCargarTareas_Click" />
-        <br />
-        <br />
-        <h3 style="color: #9D9D9D">Tareas subordinadas</h3>
-        <div id="inner_div_carga_usuario_tabla_2" class="container-fluid" style="text-align: center; vertical-align: top; left: auto; height: 100%; overflow: auto; width: auto;">
-            <asp:GridView ID="tablaCarga2" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="1429px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="White" CellPadding="10" Font-Bold="True" PageSize="6">
-                <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
-                <PagerSettings PageButtonCount="4" />
-                <Columns>
-                    <asp:CommandField ShowSelectButton="True" />
-                </Columns>
-                <SelectedRowStyle BackColor="#3399FF" />
-            </asp:GridView>
-        </div>
-        <asp:DropDownList ID="ddlCambiarEstado2" runat="server" Height="30px" Width="175px">
-        </asp:DropDownList>
-        &nbsp;
-            <asp:Button ID="btnCargarTareas2" runat="server" Text="Cambiar estado de tarea" OnClick="btnCargarTareas_2_Click" />
-        <br />
-        <br />
-    </div>
+    <br />
 </asp:Content>

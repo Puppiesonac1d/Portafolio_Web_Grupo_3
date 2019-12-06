@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -58,6 +59,30 @@ namespace Portafolio
             Diseñador = 0,
             Trabajador = 1
         }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView drv = e.Row.DataItem as DataRowView;
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    if (drv["ESTADO"].ToString().Equals("PENDIENTE"))
+                    {
+                        e.Row.Cells[4].BackColor = Color.Red;
+                    }
+                    if (drv["ESTADO"].ToString().Equals("REALIZANDOSE"))
+                    {
+                        e.Row.Cells[4].BackColor = Color.Yellow;
+                    }
+                    if (drv["ESTADO"].ToString().Equals("TERMINADA"))
+                    {
+                        e.Row.Cells[4].BackColor = Color.Green;
+                    }
+                }
+            }
+        }
+
 
         protected void IngresarTarea_2_Click(object sender, EventArgs e)
         {

@@ -13,24 +13,6 @@ namespace Portafolio {
     public partial class AgregarFlujo {
         
         /// <summary>
-        /// Control inner_div_combo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl inner_div_combo;
-        
-        /// <summary>
-        /// Control cambiar_opcion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cambiar_opcion;
-        
-        /// <summary>
         /// Control div_crear.
         /// </summary>
         /// <remarks>

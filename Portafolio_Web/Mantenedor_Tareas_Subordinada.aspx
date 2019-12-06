@@ -1,19 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Mantenedor_Tareas_Subordinada.aspx.cs" Inherits="Portafolio.Mantenedor_Tareas_Subordinada" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="inner_div_crud_tarea_2" class="container-fluid" style="text-align: center; border: 3px black; background-color: #222222;">
-        <asp:Panel ID="panel1" runat="server">
+    <div id="inner_div_crud_tarea_2" class="container-fluid" style="border-style: none; text-align: center; background-color: #2B7A78; height: auto;">
+
+
+        <div class="container-fluid" style="background-color: #17252A; width: 1200px; margin-top: 50px; margin-bottom: 50px; height: auto;">
             <h3 style="color: #9D9D9D">Tarea Subordinada</h3>
 
-            <asp:GridView ID="tablaTareas" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="1429px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="White" CellPadding="10" Font-Bold="True" PageSize="6">
+            <asp:GridView ID="tablaTareas" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="1000px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="#E5E5E5" CellPadding="10" Font-Bold="True" PageSize="6" OnRowDataBound="GridView1_RowDataBound">
                 <HeaderStyle ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
                 <PagerSettings PageButtonCount="4" />
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" />
                 </Columns>
-                <SelectedRowStyle BackColor="#3399FF" />
+                <SelectedRowStyle BackColor="#99CCFF" />
             </asp:GridView>
+        </div>
 
+
+        <div class="container-fluid" style="background-color: #17252A; width: 1200px; margin-top: 50px; margin-bottom: 50px; height: auto;">
             <table style="width: 100%">
                 <tr>
                     <td>
@@ -67,11 +72,13 @@
                 <tr>
                     <td>
                         <br>
-                        <asp:Button ID="btnGuardar_Tarea_2" runat="server" Text="Ingresar Tarea Subordinada" OnClick="IngresarTarea_2_Click" />
+                        <asp:Button ID="btnGuardar_Tarea_2" runat="server" Text="Ingresar Tarea Subordinada" OnClick="IngresarTarea_2_Click" BackColor="#17252A" ForeColor="#E9E9E9" />
                         <br>
                     </td>
                 </tr>
             </table>
-        </asp:Panel>
+            <br>
+            <br>
+        </div>
     </div>
 </asp:Content>

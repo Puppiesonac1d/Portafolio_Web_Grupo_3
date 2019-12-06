@@ -18,8 +18,7 @@ namespace Portafolio
 
             if (!Page.IsPostBack)
             {
-                div_crear.Visible = false;
-                inner_div_tabla.Visible = false;
+               
                 try
                 {
                     ora2.Open();
@@ -42,8 +41,6 @@ namespace Portafolio
                     lblError.Text = ex.ToString();
                 }
             }
-
-
         }
 
         protected void btnGuardarFlujo_Click(object sender, EventArgs e)
@@ -85,26 +82,6 @@ namespace Portafolio
             {
                 lblError.Text = ex.ToString();
             }
-        }
-
-        protected void cambiar_seleccion(object sender, EventArgs e)
-        {
-            if (cambiar_opcion.SelectedIndex.Equals(1))
-            {
-                div_crear.Visible = true;
-                inner_div_tabla.Visible = false;
-            }
-            else if (cambiar_opcion.SelectedIndex.Equals(2))
-            {
-                div_crear.Visible = false;
-                inner_div_tabla.Visible = true;
-            }
-            else
-            {
-                div_crear.Visible = false;
-                inner_div_tabla.Visible = false;
-            }
-
         }
     }
 }

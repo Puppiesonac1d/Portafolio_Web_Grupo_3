@@ -13,15 +13,15 @@ namespace Portafolio
     public partial class Mantenedor_Tareas : System.Web.UI.Page
     {
         //String de conexión
-        public Oracle.DataAccess.Client.OracleConnection ora = new Oracle.DataAccess.Client.OracleConnection("Data Source=localhost;Password=HR;USER ID=HR;");
+        public Oracle.DataAccess.Client.OracleConnection ora = new Oracle.DataAccess.Client.OracleConnection("Data Source=localhost;Password=portafolio;USER ID=portafolio;");
 
-        public System.Data.OracleClient.OracleConnection ora2 = new System.Data.OracleClient.OracleConnection("Data Source=localhost;Password=HR;USER ID=HR;");
+        public System.Data.OracleClient.OracleConnection ora2 = new System.Data.OracleClient.OracleConnection("Data Source=localhost;Password=portafolio;USER ID=portafolio;");
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-
+                lblidddl.Visible = false;
                 txtCorreo.Text = Session["Value"].ToString();
                 panelCRUDtarea.Visible = true;
 
@@ -106,6 +106,9 @@ namespace Portafolio
                 lblidddl.Text = tipo;
                 int flujo = ddlFlujo.SelectedIndex + 1;
 
+                //FECHA
+                var date = fecha.SelectedDate;
+
                 ora2.Open();
                 System.Data.OracleClient.OracleCommand comando2 = new System.Data.OracleClient.OracleCommand("INSERT_TAREA", ora2);
                 comando2.CommandType = System.Data.CommandType.StoredProcedure;
@@ -115,6 +118,7 @@ namespace Portafolio
                 comando2.Parameters.Add("P_ESTADO", OracleType.Int32).Value = 4;
                 comando2.Parameters.Add("P_TIPOTAREA", OracleType.VarChar).Value = tipo;
                 comando2.Parameters.Add("P_FLUJO", OracleType.VarChar).Value = flujo;
+                comando2.Parameters.Add("P_FECHA", OracleType.DateTime).Value = date.ToString();
                 comando2.ExecuteNonQuery();
                 // ora2.Close();
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Tarea Insertada');</script>");

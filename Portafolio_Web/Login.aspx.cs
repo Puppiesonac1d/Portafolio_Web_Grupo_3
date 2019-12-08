@@ -12,7 +12,7 @@ namespace Portafolio
     public partial class Login : System.Web.UI.Page
     {
         //String de conexión
-        public OracleConnection ora = new OracleConnection("Data Source=localhost;Password=HR;USER ID=HR;");
+        public OracleConnection ora = new OracleConnection("Data Source=localhost;Password=portafolio;USER ID=portafolio;");
         protected void Page_Load(object sender, EventArgs e)
         {
             lblError.Visible = false;
@@ -47,9 +47,12 @@ namespace Portafolio
                     if (correoTMP == correo.Value.ToString().ToUpper() && contrasenaTMP == contrasena.Value.ToString() && credencialStr != "1")
                     {
                         Session["Value"] = correoTMP.ToString();
+                        Session["Value2"] = contrasenaTMP.ToString();
+                        Session["Value3"] = credencialStr.ToString();
                         if (Session["Value"] != null)
                         {
                             Response.Redirect("Calcular_Carga.aspx");
+
                         }
                         else
                         {

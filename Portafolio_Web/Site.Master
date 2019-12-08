@@ -86,7 +86,12 @@
                         <li><a runat="server" href="~/Calcular_Carga">Inicio</a></li>
                         <li><a runat="server" href="~/Mantenedor_Tareas">Agregar Tarea</a></li>
                         <li><a runat="server" href="Mantenedor_Tareas_Subordinada.aspx">Agregar Tarea Subordinada</a></li>
-                        <li><a runat="server" href="~/AgregarFlujo">Flujos de Tarea</a></li>
+                        <li>
+                            <asp:HyperLink ID="agregarFlujo"
+                                NavigateUrl="AgregarFlujo.aspx"
+                                Text="Agregar Flujo"
+                                runat="server" />
+                        </li>
                         <li><a runat="server" href="~/Login">Cerrar Sesión</a></li>
                     </ul>
                 </div>

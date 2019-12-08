@@ -12,7 +12,7 @@ namespace Portafolio
     public partial class AgregarFlujo : System.Web.UI.Page
     {
 
-        public System.Data.OracleClient.OracleConnection ora2 = new System.Data.OracleClient.OracleConnection("Data Source=localhost;Password=HR;USER ID=HR;");
+        public System.Data.OracleClient.OracleConnection ora2 = new System.Data.OracleClient.OracleConnection("Data Source=localhost;Password=portafolio;USER ID=portafolio;");
         protected void Page_Load(object sender, EventArgs e)
         {
 

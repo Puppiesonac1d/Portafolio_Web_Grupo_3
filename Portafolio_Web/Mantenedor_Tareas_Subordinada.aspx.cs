@@ -13,8 +13,8 @@ namespace Portafolio
     public partial class Mantenedor_Tareas_Subordinada : System.Web.UI.Page
     {
         //String de conexión
-        public Oracle.DataAccess.Client.OracleConnection ora = new Oracle.DataAccess.Client.OracleConnection("Data Source=localhost;Password=HR;USER ID=HR;");
-        public System.Data.OracleClient.OracleConnection ora2 = new System.Data.OracleClient.OracleConnection("Data Source=localhost;Password=HR;USER ID=HR;");
+        public Oracle.DataAccess.Client.OracleConnection ora = new Oracle.DataAccess.Client.OracleConnection("Data Source=localhost;Password=portafolio;USER ID=portafolio;");
+        public System.Data.OracleClient.OracleConnection ora2 = new System.Data.OracleClient.OracleConnection("Data Source=localhost;Password=portafolio;USER ID=portafolio;");
         String lblidddl = "";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -110,6 +110,9 @@ namespace Portafolio
                 GridViewRow rowTarea = tablaTareas.SelectedRow;
                 string textTarea = rowTarea.Cells[1].Text;
 
+                //FECHA
+                var date = fecha.SelectedDate;
+
                 ora2.Open();
                 System.Data.OracleClient.OracleCommand comando2 = new System.Data.OracleClient.OracleCommand("INSERT_TAREA_SUB", ora2);
                 comando2.CommandType = System.Data.CommandType.StoredProcedure;
@@ -119,7 +122,7 @@ namespace Portafolio
                 comando2.Parameters.Add("P_IDUSUARIO", OracleType.Int32).Value = id;
                 comando2.Parameters.Add("P_ESTADO", OracleType.Int32).Value = 4;
                 comando2.Parameters.Add("P_TIPOTAREA", OracleType.VarChar).Value = tipo;
-
+                comando2.Parameters.Add("P_FECHA", OracleType.DateTime).Value = date.ToString();
                 comando2.ExecuteNonQuery();
                 // ora2.Close();
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Tarea Insertada');</script>");

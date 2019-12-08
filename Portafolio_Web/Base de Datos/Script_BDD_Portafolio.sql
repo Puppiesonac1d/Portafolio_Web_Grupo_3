@@ -87,6 +87,7 @@ IDUSUARIO INT NOT NULL,
 IDESTADO INT NOT NULL,
 Tipo_Tarea varchar2(10) not null,
 IDFLUJO INT NOT NULL,
+FECHA_TAREA DATE NOT NULL,
 CONSTRAINT IDTAREA_pk PRIMARY KEY (IDTAREA),
 FOREIGN KEY (IDUSUARIO) REFERENCES USUARIOS(IDUSUARIO),
 FOREIGN KEY (IDESTADO) REFERENCES ESTADO(IDESTADO),
@@ -102,6 +103,7 @@ DESCRIPCION_TAREA VARCHAR2(100) NOT NULL,
 IDUSUARIO INT NOT NULL,
 IDESTADO INT NOT NULL,
 Tipo_Tarea varchar2(10) not null,
+FECHA_TAREA DATE NOT NULL,
 CONSTRAINT IDTAREA_sub_pk PRIMARY KEY (IDTAREA_SUB),
 FOREIGN KEY (IDUSUARIO) REFERENCES USUARIOS(IDUSUARIO),
 FOREIGN KEY (IDESTADO) REFERENCES ESTADO(IDESTADO),
@@ -111,25 +113,6 @@ CONSTRAINT fk_tarea_SUB FOREIGN KEY(IDTAREA_SUB) REFERENCES TAREA_SUBORDINADA(ID
 
 
 
-
-CREATE TABLE Historial_tareas(
-IDHISTORIAL_tarea INT NOT NULL,
-IDTAREA INT NOT NULL,
-IDUSUARIO INT NOT NULL,
-DESCRIPCION_TAREA VARCHAR2(100) NOT NULL,
-FECHA_TAREA timestamp,
-CONSTRAINT IDHISTORIAL_pk PRIMARY KEY (IDHISTORIAL_tarea)
-);
-
-CREATE TABLE Historial_flujo(
-IDHISTORIAL_flujo INT NOT NULL,
-IDFLUJO INT NOT NULL,
-IDTAREA INT NOT NULL,
-IDUSUARIO INT NOT NULL,
-DESCRIPCION_TAREA VARCHAR2(100) NOT NULL,
-FECHA_TAREA timestamp,
-CONSTRAINT IDHISTORIAL_FLUJO_pk PRIMARY KEY (IDHISTORIAL_flujo)
-);
 
 
 --Poblado de Tablas
@@ -230,11 +213,11 @@ END;
 --Tarea / flujo
 drop trigger tr_tarea;
 
-CREATE OR REPLACE PROCEDURE INSERT_TAREA(p_nombre in tarea.nombre_tarea%type,p_descripcion in tarea.descripcion_tarea%type,p_idusuario in tarea.idusuario%type ,P_ESTADO IN INT,p_tipotarea in tarea.tipo_tarea%type,p_flujo flujo.idflujo%type)
+CREATE OR REPLACE PROCEDURE INSERT_TAREA(p_nombre in tarea.nombre_tarea%type,p_descripcion in tarea.descripcion_tarea%type,p_idusuario in tarea.idusuario%type ,P_ESTADO IN INT,p_tipotarea in tarea.tipo_tarea%type,p_flujo flujo.idflujo%type,P_FECHA in tarea.fecha_tarea%type)
 IS
 BEGIN  
-  INSERT INTO TAREA (idtarea,nombre_tarea,DESCRIPCION_TAREA,IDUSUARIO,IDESTADO,TIPO_TAREA,idflujo) 
-  VALUES (incremento_id_tarea.nextval,p_nombre,P_DESCRIPCION,P_IDUSUARIO,P_ESTADO,P_TIPOTAREA,P_FLUJO); 
+  INSERT INTO TAREA (idtarea,nombre_tarea,DESCRIPCION_TAREA,IDUSUARIO,IDESTADO,TIPO_TAREA,idflujo,fecha_tarea) 
+  VALUES (incremento_id_tarea.nextval,p_nombre,P_DESCRIPCION,P_IDUSUARIO,P_ESTADO,P_TIPOTAREA,P_FLUJO,P_FECHA); 
   COMMIT;
 END;
 /
@@ -243,7 +226,7 @@ CREATE OR REPLACE PROCEDURE listar_tareas (p_correo in usuarios.correo%type,p_re
 AS 
 BEGIN 
   OPEN p_recordset FOR
-    SELECT t.idtarea as "N° de Tarea",t.nombre_tarea as "Nombre de Tarea",t.descripcion_tarea as "Descripción",e.descripcion_estado as "Estado" FROM tarea t join estado e on t.idestado = e.idestado
+    SELECT t.idtarea as "N° de Tarea",t.nombre_tarea as "Nombre de Tarea",t.descripcion_tarea as "Descripción",e.descripcion_estado as "Estado",t.fecha_tarea as "Fecha límite de Tarea" FROM tarea t join estado e on t.idestado = e.idestado
     join usuarios u on u.idusuario = t.idusuario
     where u.correo=p_correo and t.idestado not like 4;
 END;
@@ -253,7 +236,7 @@ CREATE OR REPLACE PROCEDURE listar_tareas_asignandose (p_correo in usuarios.corr
 AS 
 BEGIN 
   OPEN p_recordset FOR
-    SELECT t.idtarea as "N° de Tarea",t.nombre_tarea as "Nombre de Tarea",t.descripcion_tarea as "Descripción",e.descripcion_estado as "Estado"  FROM tarea t join estado e on t.idestado = e.idestado
+    SELECT t.idtarea as "N° de Tarea",t.nombre_tarea as "Nombre de Tarea",t.descripcion_tarea as "Descripción",e.descripcion_estado as "Estado",t.fecha_tarea as "Fecha límite de Tarea"  FROM tarea t join estado e on t.idestado = e.idestado
     join usuarios u on u.idusuario = t.idusuario
     where u.correo=p_correo and t.idestado=4;
 END;
@@ -263,7 +246,7 @@ AS
 BEGIN 
   OPEN p_recordset FOR
     SELECT t.idtarea_sub "N° de Tarea Subordinada",ta.nombre_tarea as "Tarea Padre",t.descripcion_tarea as "Descripción",
-    e.descripcion_estado as "Estado"FROM tarea_subordinada t join estado e on t.idestado = e.idestado
+    e.descripcion_estado as "Estado",t.fecha_Tarea as "Fecha límite de tarea" FROM tarea_subordinada t join estado e on t.idestado = e.idestado
     join usuarios u on u.idusuario=t.idusuario
     JOIN tarea ta on ta.idTarea = t.idTarea
     where u.correo=p_correo and t.idestado = 4
@@ -275,7 +258,7 @@ CREATE OR REPLACE PROCEDURE listar_tareas_y_flujo (p_correo in usuarios.correo%t
 AS 
 BEGIN 
   OPEN p_recordset FOR
-    SELECT t.idtarea as "N° de Tarea",t.nombre_tarea as "Nombre de Tarea",t.descripcion_tarea as "Descripción",e.descripcion_estado as "Estado",f.descripcion_flujo as "Flujo" FROM tarea t join estado e on t.idestado = e.idestado
+    SELECT t.idtarea as "N° de Tarea",t.nombre_tarea as "Nombre de Tarea",t.descripcion_tarea as "Descripción",e.descripcion_estado as "Estado",f.descripcion_flujo as "Flujo", T.FECHA_TAREA AS "Fecha límite de tarea" FROM tarea t join estado e on t.idestado = e.idestado
     join flujo f on t.idflujo = f.idflujo
     join usuarios u on u.idusuario=t.idusuario
     where u.correo=p_correo AND T.IDESTADO NOT LIKE 4
@@ -288,7 +271,7 @@ AS
 BEGIN 
   OPEN p_recordset FOR
     SELECT t.idtarea_sub "N° de Tarea Subordinada",ta.nombre_tarea as "Tarea Padre",t.descripcion_tarea as "Descripción",
-    e.descripcion_estado as "Estado"FROM tarea_subordinada t join estado e on t.idestado = e.idestado
+    e.descripcion_estado as "Estado", t.fecha_tarea as "Fecha límite de Tarea" FROM tarea_subordinada t join estado e on t.idestado = e.idestado
     join usuarios u on u.idusuario=t.idusuario
     JOIN tarea ta on ta.idTarea = t.idTarea
     where  t.idestado < 4 AND u.correo=p_correo 
@@ -335,11 +318,11 @@ END;
 
 CREATE OR REPLACE PROCEDURE INSERT_TAREA_SUB
 (p_nombre in tarea_subordinada.nombre_tarea%type,p_descripcion in tarea_subordinada.descripcion_tarea%type,p_idusuario in tarea_subordinada.idusuario%type 
-,P_ESTADO IN INT,p_tipotarea in tarea_subordinada.tipo_tarea%type,p_idtarea tarea.idtarea%type)
+,P_ESTADO IN INT,p_tipotarea in tarea_subordinada.tipo_tarea%type,p_idtarea tarea.idtarea%type,P_FECHA in tarea_subordinada.fecha_tarea%type)
 IS
 BEGIN  
-  INSERT INTO TAREA_SUBORDINADA (IDTAREA_SUB,IDTAREA,nombre_tarea,DESCRIPCION_TAREA,IDUSUARIO,IDESTADO,TIPO_TAREA) 
-  VALUES (incremento_id_tarea_SUB.nextval,P_IDTAREA,p_nombre,P_DESCRIPCION,P_IDUSUARIO,P_ESTADO,P_TIPOTAREA); 
+  INSERT INTO TAREA_SUBORDINADA (IDTAREA_SUB,IDTAREA,nombre_tarea,DESCRIPCION_TAREA,IDUSUARIO,IDESTADO,TIPO_TAREA,fecha_tarea) 
+  VALUES (incremento_id_tarea_SUB.nextval,P_IDTAREA,p_nombre,P_DESCRIPCION,P_IDUSUARIO,P_ESTADO,P_TIPOTAREA,P_FECHA); 
   COMMIT;
 END;
 /

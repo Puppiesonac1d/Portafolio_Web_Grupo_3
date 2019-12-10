@@ -104,6 +104,15 @@
                 </asp:ContentPlaceHolder>
             </div>
         </div>
+        <footer style="position: fixed; bottom: 0; width: 100%; height: 100px; background-color: #2B7A78;">
+            <div style="background-color: #17252A; text-align: center; vertical-align: top; left: auto; height: 100%; width: auto;">
+                <br />
+
+                <p style="margin-top: 20px; margin-bottom: 20px; color: #9D9D9D;">Proyecto de Portafolio - 2019</p>
+                <br />
+
+            </div>
+        </footer>
     </form>
 </body>
 </html>

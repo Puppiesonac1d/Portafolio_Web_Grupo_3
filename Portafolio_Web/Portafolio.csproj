@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AgregarFlujo.aspx" />
+    <Content Include="Ayuda.aspx" />
     <Content Include="Calcular_Carga.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -179,6 +180,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Ayuda.aspx.cs">
+      <DependentUpon>Ayuda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda.aspx.designer.cs">
+      <DependentUpon>Ayuda.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Calcular_Carga.aspx.cs">
       <DependentUpon>Calcular_Carga.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

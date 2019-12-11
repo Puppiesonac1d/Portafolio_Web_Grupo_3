@@ -23,12 +23,40 @@ namespace Portafolio
             {
                 lblidddl.Visible = false;
                 txtCorreo.Text = Session["Value"].ToString();
-                panelCRUDtarea.Visible = true;
+
 
                 Array enumList1 = Enum.GetValues(typeof(tiposTarea));
                 foreach (tiposTarea getTipoTarea in enumList1)
                 {
                     ddlTipoTarea.Items.Add(new ListItem(getTipoTarea.ToString(), ((int)getTipoTarea).ToString()));
+                }
+
+                try
+                {
+                    ora2.Open();
+                    System.Data.OracleClient.OracleCommand comando3 = new System.Data.OracleClient.OracleCommand("listar_tareas_devueltas");
+                    comando3.Connection = ora2;
+                    comando3.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    comando3.Parameters.Add("p_recordset", OracleType.Cursor).Direction = ParameterDirection.Output;
+                    System.Data.OracleClient.OracleDataAdapter adaptador = new System.Data.OracleClient.OracleDataAdapter();
+
+                    adaptador.SelectCommand = comando3;
+                    DataTable dt = new DataTable();
+                    adaptador.Fill(dt);
+
+                    tablasTareasDevueltas.DataSource = dt;
+                    tablasTareasDevueltas.DataBind();
+
+                    if (tablasTareasDevueltas.Rows.Count == 0)
+                    {
+                        // Response.Write("<script>('No hay tareas pendientes')</script>");
+                    }
+                    ora2.Close();
+                }
+                catch (Exception ex)
+                {
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error actualizando');</script>");
                 }
 
                 try
@@ -64,7 +92,7 @@ namespace Portafolio
         public enum tiposTarea
         {
             Diseñador = 0,
-            Trabajador = 1
+            Funcionario = 1
         }
 
         public enum tipoCrud
@@ -132,6 +160,32 @@ namespace Portafolio
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error' " + ex.ToString() + "');</script>");
             }
 
+        }
+
+        protected void reasignar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Get the currently selected row using the SelectedRow property.
+                GridViewRow rowTarea = tablasTareasDevueltas.SelectedRow;
+                string textTarea = rowTarea.Cells[1].Text;
+                ora2.Open();
+                System.Data.OracleClient.OracleCommand comando = new System.Data.OracleClient.OracleCommand("update_tarea_reasignar2");
+                comando.Connection = ora2;
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Parameters.Add("p_correo", OracleType.VarChar).Value = txtCorreoReasignar.Text;
+                comando.Parameters.Add("P_IDTAREA", OracleType.Int32).Value = Int32.Parse(textTarea);
+                comando.ExecuteNonQuery();
+                ora2.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error actualizando');</script>");
+
+            }
+            Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
         }
     }
 }

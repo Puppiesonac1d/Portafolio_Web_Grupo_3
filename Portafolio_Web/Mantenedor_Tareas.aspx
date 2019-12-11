@@ -1,99 +1,110 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Mantenedor_Tareas.aspx.cs" Inherits="Portafolio.Mantenedor_Tareas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div id="div_crud_tareas" class="container-fluid" style="border-style: none; text-align: center; background-color: #2B7A78; height: auto;">
+    <div id="div_crud_tareas" class="container-fluid" style="border-style: none; text-align: center; background-color: #2B7A78; overflow: auto; height: auto;">
         <br>
         <br>
         <div id="inner_div_crud_tarea_elementos" class="container-fluid" style="text-align: center; background-color: #17252A; width: 900px; margin-top: 50px; margin-bottom: 50px; height: auto;">
             <h3 style="color: #9D9D9D">Ingresar Tarea</h3>
-            <asp:Panel ID="panelCRUDtarea" runat="server">
-            </asp:Panel>
-
-            <table style="width: 100%" __designer:mapid="9d">
-                <tr __designer:mapid="9e">
-                    <td __designer:mapid="9f">
-                        <br __designer:mapid="a0">
+            <br>
+            <table style="width: 750px; height: auto;">
+                <tr>
+                    <td align="right">
+                        <br>
                         <asp:Label ID="Label5" runat="server" Text="Nombre de Tarea:" Style="color: #9D9D9D;"></asp:Label>
-                        <br __designer:mapid="c0">
+                        <br>
                     </td>
-                    <td __designer:mapid="a1">
-                        <br __designer:mapid="a2">
+                    <td align="right">
+                        <br>
                         <asp:TextBox ID="txtNombre" runat="server" Width="300px"></asp:TextBox>
-                        <br __designer:mapid="c2">
+                        <br>
                     </td>
                 </tr>
-                <tr __designer:mapid="a3">
-                    <td __designer:mapid="a4">
-                        <br __designer:mapid="a5">
+                <tr>
+                    <td align="right">
+                        <br>
                         <asp:Label ID="Label4" runat="server" Text="Descripción de Tarea:" Style="color: #9D9D9D;"></asp:Label>
-                        <br __designer:mapid="c4">
+                        <br>
                     </td>
-                    <td __designer:mapid="a6">
-                        <br __designer:mapid="a7">
+                    <td align="right">
+                        <br>
                         <asp:TextBox ID="txtDescripcion" runat="server" Width="300px"></asp:TextBox>
-                        <br __designer:mapid="c6">
+                        <br>
                     </td>
                 </tr>
 
-                <tr __designer:mapid="a8">
-                    <td __designer:mapid="a9">
-                        <br __designer:mapid="aa">
+                <tr>
+                    <td align="right">
+                        <br>
                         <asp:Label ID="Label1" runat="server" Text="Correo de Encargado:" Style="color: #9D9D9D;"></asp:Label>
-                        <br __designer:mapid="c8">
+                        <br>
                     </td>
-                    <td __designer:mapid="ab">
-                        <br __designer:mapid="ac">
+                    <td align="right">
+                        <br>
                         <asp:TextBox ID="txtCorreo" runat="server" Width="300px"></asp:TextBox>
-                        <br __designer:mapid="ca">
+                        <br>
                     </td>
                 </tr>
-                <tr __designer:mapid="ad">
-                    <td __designer:mapid="ae">
-                        <br __designer:mapid="af">
+                <tr>
+                    <td align="right">
+                        <br>
                         <asp:Label ID="Label3" runat="server" Text="Tipo de Tarea:" Style="color: #9D9D9D;"></asp:Label>
-                        <br __designer:mapid="cc">
+                        <br>
                     </td>
-                    <td __designer:mapid="b0">
-                        <br __designer:mapid="b1">
+                    <td align="right">
+                        <br>
                         <asp:DropDownList ID="ddlTipoTarea" runat="server" Height="22px" Width="300px" Style="margin-left: auto"></asp:DropDownList>
-                        <br __designer:mapid="ce">
+                        <br>
                     </td>
                 </tr>
-                <tr __designer:mapid="b2">
-                    <td __designer:mapid="b3">
-                        <br __designer:mapid="b4">
+                <tr>
+                    <td align="right">
+                        <br>
                         <asp:Label ID="Label2" runat="server" Text="Asignar flujo de tarea:" Style="color: #9D9D9D;"></asp:Label>
-                        <br __designer:mapid="d0">
+                        <br>
                     </td>
-                    <td __designer:mapid="b5">
-                        <br __designer:mapid="b6">
+                    <td align="right">
+                        <br>
                         <asp:DropDownList ID="ddlFlujo" AutoPostBack="true" runat="server" Width="300px"></asp:DropDownList>
-                        <br __designer:mapid="d2">
+                        <br>
                     </td>
                 </tr>
-                <tr __designer:mapid="b7">
-                    <td __designer:mapid="b8">
-                        <br __designer:mapid="b9">
+                <tr>
+                    <td align="right">
+                        <br>
                         <asp:Label ID="Label6" runat="server" Text="Fecha Límite de Tarea:" Style="color: #9D9D9D;"></asp:Label>
-                        <br __designer:mapid="d4">
+                        <br>
                     </td>
-                    <td __designer:mapid="ba">
-                        <br __designer:mapid="bb">
-                        <div __designer:mapid="d5">
-                            <asp:Calendar ID="fecha" runat="server" Width="307px" BackColor="#E5E5E5" Style="margin-left: 154px" Format="dd/MM/yyyy" Height="129px"></asp:Calendar>
-                        </div>
-                        <br __designer:mapid="d7">
+                    <td align="right">
+                        <br>
+                        <asp:Calendar ID="fecha" runat="server" Width="400px" BackColor="#E5E5E5" Format="dd/MM/yyyy"></asp:Calendar>
+                        <br>
                     </td>
                 </tr>
-                <tr __designer:mapid="bc">
-                    <td __designer:mapid="bd">
-                        <br __designer:mapid="be">
+                <tr>
+                    <td align="right">
+                        <br>
                         <asp:Button ID="ingresarTarea" runat="server" Text="Ingresar Tarea" OnClick="ingresarTarea_Click" BackColor="#17252A" ForeColor="#E9E9E9" />
-                        <br __designer:mapid="d9">
+                        <br>
                     </td>
                 </tr>
             </table>
+            <br />
+
+            <h3 style="color: #9D9D9D">Tareas devueltas</h3>
+            <div id="inner_div_tareas_pendientes" class="container-fluid" style="text-align: center; vertical-align: top; left: auto; height: 100%; overflow: auto; width: auto;">
+                <asp:GridView ID="tablasTareasDevueltas" AutoPostBack="true" runat="server" CssClass="table table-hover " GridLines="Both" Height="100px" Width="700px" HorizontalAlign="Center" ForeColor="black" AllowPaging="True" BackColor="#E5E5E5" CellPadding="10" Font-Bold="True" PageSize="6">
+                    <HeaderStyle ForeColor="#9D9D9D" HorizontalAlign="Center" VerticalAlign="Middle" BackColor="#17252A" />
+                    <PagerSettings PageButtonCount="4" />
+                    <Columns>
+                        <asp:CommandField ShowSelectButton="True" />
+                    </Columns>
+                    <SelectedRowStyle BackColor="#99CCFF" />
+                </asp:GridView>
+                <asp:Label ID="label" runat="server" Text="Correo de reasignación:" Style="color: #9D9D9D;"></asp:Label>
+                <asp:TextBox ID="txtCorreoReasignar" runat="server" Width="300px"></asp:TextBox>
+                <asp:Button ID="btnReasignar" runat="server" Text="Ingresar Tarea" BackColor="#17252A" ForeColor="#E9E9E9" OnClick="reasignar_Click" />
+            </div>
             <br />
             <br />
         </div>

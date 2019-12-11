@@ -241,6 +241,30 @@ BEGIN
     where u.correo=p_correo and t.idestado=4;
 END;
 /
+
+CREATE OR REPLACE PROCEDURE listar_tareas_DEVUELTAS (p_recordset OUT SYS_REFCURSOR)
+AS 
+BEGIN 
+  OPEN p_recordset FOR
+    SELECT t.idtarea as "N° de Tarea",t.nombre_tarea as "Nombre de Tarea",t.descripcion_tarea as "Descripción",e.descripcion_estado as "Estado",t.fecha_tarea as "Fecha límite de Tarea"  FROM tarea t join estado e on t.idestado = e.idestado
+    join usuarios u on u.idusuario = t.idusuario
+    where t.idestado=5;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE listar_tareas_DEVUELTAS2 (p_recordset OUT SYS_REFCURSOR)
+AS 
+BEGIN 
+  OPEN p_recordset FOR
+    SELECT t.idtarea_sub "N° de Tarea Subordinada",ta.nombre_tarea as "Tarea Padre",t.descripcion_tarea as "Descripción",
+    e.descripcion_estado as "Estado",t.fecha_Tarea as "Fecha límite de tarea" FROM tarea_subordinada t join estado e on t.idestado = e.idestado
+    join usuarios u on u.idusuario=t.idusuario
+    JOIN tarea ta on ta.idTarea = t.idTarea
+    where t.idestado=5;
+END;
+/
+
+
 create or replace PROCEDURE listar_tareas_sub_asignandose (p_correo in usuarios.correo%type,p_recordset OUT SYS_REFCURSOR)
 AS 
 BEGIN 
@@ -261,7 +285,7 @@ BEGIN
     SELECT t.idtarea as "N° de Tarea",t.nombre_tarea as "Nombre de Tarea",t.descripcion_tarea as "Descripción",e.descripcion_estado as "Estado",f.descripcion_flujo as "Flujo", T.FECHA_TAREA AS "Fecha límite de tarea" FROM tarea t join estado e on t.idestado = e.idestado
     join flujo f on t.idflujo = f.idflujo
     join usuarios u on u.idusuario=t.idusuario
-    where u.correo=p_correo AND T.IDESTADO NOT LIKE 4
+    where u.correo=p_correo AND T.IDESTADO NOT LIKE 4 and T.IDESTADO NOT LIKE 5
     ORDER BY t.IDTAREA ASC;
 END;
 /
@@ -274,16 +298,54 @@ BEGIN
     e.descripcion_estado as "Estado", t.fecha_tarea as "Fecha límite de Tarea" FROM tarea_subordinada t join estado e on t.idestado = e.idestado
     join usuarios u on u.idusuario=t.idusuario
     JOIN tarea ta on ta.idTarea = t.idTarea
-    where  t.idestado < 4 AND u.correo=p_correo 
+    where  t.idestado BETWEEN 1 AND 3 AND u.correo=p_correo 
     ORDER BY t.IDTAREA ASC;
 END;
 /
 
 
-CREATE OR REPLACE PROCEDURE update_tarea_reasignar(p_correo IN usuarios.correo%TYPE,P_ESTADO IN tarea.idestado%TYPE,P_IDTAREA IN tarea.idtarea%TYPE)
+create or replace PROCEDURE update_tarea_reasignar(p_correo IN usuarios.correo%TYPE,P_IDTAREA IN tarea.idtarea%TYPE)
 IS
 BEGIN
-  UPDATE TAREA SET IDUSUARIO = (SELECT IDUSUARIO FROM USUARIOS WHERE CORREO=P_CORREO), IDESTADO = P_ESTADO
+  UPDATE TAREA SET IDUSUARIO = (SELECT IDUSUARIO FROM USUARIOS WHERE CORREO=P_CORREO), IDESTADO = 1
+  WHERE IDTAREA = P_IDTAREA;
+  COMMIT;
+END;
+
+/
+
+create or replace PROCEDURE update_tarea_reasignar2(p_correo IN usuarios.correo%TYPE,P_IDTAREA IN tarea.idtarea%TYPE)
+IS
+BEGIN
+  UPDATE TAREA SET IDUSUARIO = (SELECT IDUSUARIO FROM USUARIOS WHERE CORREO=P_CORREO), IDESTADO = 4
+  WHERE IDTAREA = P_IDTAREA;
+  COMMIT;
+END;
+/
+
+create or replace PROCEDURE update_tarea_reasignar3(P_IDTAREA IN tarea_subordinada.idtarea_sub%TYPE)
+IS
+BEGIN
+   UPDATE TAREA_SUBORDINADA SET 
+   IDESTADO = 5
+  WHERE IDTAREA_SUB = P_IDTAREA;
+  COMMIT;
+END;
+/
+
+create or replace PROCEDURE update_tarea_reasignar4(p_correo IN usuarios.correo%TYPE,P_IDTAREA IN TAREA_SUBORDINADA.idtarea_SUB%TYPE)
+IS
+BEGIN
+  UPDATE TAREA_SUBORDINADA SET IDUSUARIO = (SELECT IDUSUARIO FROM USUARIOS WHERE CORREO=P_CORREO), IDESTADO = 4
+  WHERE IDTAREA_SUB = P_IDTAREA;
+  COMMIT;
+END;
+/
+
+create or replace PROCEDURE update_tarea_reasignar5(P_IDTAREA IN tarea.idtarea%TYPE)
+IS
+BEGIN
+  UPDATE TAREA SET IDESTADO = 5
   WHERE IDTAREA = P_IDTAREA;
   COMMIT;
 END;

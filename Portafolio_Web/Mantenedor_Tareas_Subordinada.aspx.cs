@@ -25,6 +25,43 @@ namespace Portafolio
             {
                 ddlTipoTarea_2.Items.Add(new ListItem(getTipoTarea.ToString(), ((int)getTipoTarea).ToString()));
             }
+            CargarQuerys();
+        }
+        public enum tiposTarea
+        {
+            Diseñador = 0,
+            Trabajador = 1
+        }
+
+        public void CargarQuerys()
+        {
+            try
+            {
+                ora2.Open();
+                System.Data.OracleClient.OracleCommand comando3 = new System.Data.OracleClient.OracleCommand("listar_tareas_devueltas2");
+                comando3.Connection = ora2;
+                comando3.CommandType = System.Data.CommandType.StoredProcedure;
+
+                comando3.Parameters.Add("p_recordset", OracleType.Cursor).Direction = ParameterDirection.Output;
+                System.Data.OracleClient.OracleDataAdapter adaptador = new System.Data.OracleClient.OracleDataAdapter();
+
+                adaptador.SelectCommand = comando3;
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+
+                tablasTareasDevueltas.DataSource = dt;
+                tablasTareasDevueltas.DataBind();
+
+                if (tablasTareasDevueltas.Rows.Count == 0)
+                {
+                    // Response.Write("<script>('No hay tareas pendientes')</script>");
+                }
+                ora2.Close();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error actualizando');</script>");
+            }
 
             try
             {
@@ -53,11 +90,6 @@ namespace Portafolio
             {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error actualizando');</script>");
             }
-        }
-        public enum tiposTarea
-        {
-            Diseñador = 0,
-            Trabajador = 1
         }
 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -88,7 +120,6 @@ namespace Portafolio
         {
             try
             {
-
                 //Para el Usuario
                 ora.Open();
                 //Llamar al Stored Procedure
@@ -126,13 +157,39 @@ namespace Portafolio
                 comando2.ExecuteNonQuery();
                 // ora2.Close();
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Tarea Insertada');</script>");
-
+                CargarQuerys();
                 txtDescripcionTarea_2.Text = "";
             }
             catch (Exception ex)
             {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error' " + ex.ToString() + "');</script>");
             }
+        }
+
+        protected void reasignar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Get the currently selected row using the SelectedRow property.
+                GridViewRow rowTarea = tablasTareasDevueltas.SelectedRow;
+                string textTarea = rowTarea.Cells[1].Text;
+                ora2.Open();
+                System.Data.OracleClient.OracleCommand comando = new System.Data.OracleClient.OracleCommand("update_tarea_reasignar4");
+                comando.Connection = ora2;
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Parameters.Add("p_correo", OracleType.VarChar).Value = txtCorreoReasignar.Text;
+                comando.Parameters.Add("P_IDTAREA", OracleType.Int32).Value = Int32.Parse(textTarea);
+                comando.ExecuteNonQuery();
+                ora2.Close();
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Tarea reaignada');</script>");
+                CargarQuerys();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Ha ocurrido un error actualizando');</script>");
+
+            }
+
         }
 
     }

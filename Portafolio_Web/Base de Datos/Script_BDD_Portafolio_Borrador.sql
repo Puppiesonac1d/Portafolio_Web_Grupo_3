@@ -159,12 +159,11 @@ OPEN p_recordset FOR
 END;
 /
 
-create or replace PROCEDURE LISTAR_USUARIOS (p_recordset OUT SYS_REFCURSOR)
+CREATE OR REPLACE PROCEDURE listar_usuarios (p_recordset OUT SYS_REFCURSOR)
 AS 
 BEGIN 
   OPEN p_recordset FOR
-    SELECT u.idusuario as "ID de Usuario",u.correo as "Correo de Usuario",u.contrasena as "Contraseña",u.rut as "Rut",u.nombre as "Nombre",u.appaterno as "Apellido Paterno",u.apmaterno as "Apellido Materno",
-    u.fec_creacion as "Fecha de Creación",tu.descripcion as "Tipo de Usuario" FROM usuarios u join tipo_usuario tu on u.idtipousuario=tu.idtipousuario;
+    SELECT u.idusuario,u.correo,u.contrasena,u.rut,u.nombre,u.appaterno,u.apmaterno,u.fec_creacion,tu.descripcion FROM usuarios u join tipo_usuario tu on u.idtipousuario=tu.idtipousuario;
 END;
 /
 
